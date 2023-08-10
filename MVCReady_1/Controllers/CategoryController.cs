@@ -26,7 +26,7 @@ namespace MVCReady_1.Controllers
             return RedirectToAction("ListCategories");
         }
 
-        public IActionResult ListCategory() 
+        public IActionResult ListCategories() 
         {
             
             return View(_db.Categories.ToList());
