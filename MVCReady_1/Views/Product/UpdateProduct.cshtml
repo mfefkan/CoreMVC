@@ -1,0 +1,76 @@
+﻿@using MVCReady_1.VMModels;
+
+@model AddProductPageVM
+
+
+<style>
+
+    .genislik {
+        width: 300px;
+    }
+</style>
+
+@using (Html.BeginForm("UpdateProduct", "Product",FormMethod.Post,new {enctype = "multipart/form-data"}))
+{
+
+    @Html.HiddenFor(x=> x.Product.ID)
+    <div class="row">
+
+        <div class="col-sm-12">
+
+            <section class="panel">
+
+                <header class="panel-heading">
+                    Ürün Güncelleme Sayfası
+                </header>
+
+                <br/>
+
+                <div class="form-control">
+                    <label class="col-sm-2">Ürün Isim</label>
+                    <div class="col-sm-12">
+                        @Html.TextBoxFor(x=> x.Product.ProductName, new {@class = "form-control-genislik"})
+                    </div>
+                
+                <br/>
+                
+                    <label class="col-sm-2">Ürün Fiyat</label>
+                    <div class="col-sm-12">
+                        @Html.TextBoxFor(x=> x.Product.UnitPrice, new {@class = "form-control-genislik"})
+                    </div>
+                
+                <br/>
+                
+                    <label class="col-sm-2">Ürün Categorisi</label>
+                    <div class="col-sm-12">
+                        @Html.DropDownListFor(x=> x.Product.CategoryID, new SelectList(Model.Categories,"ID","CategoryName"),"Lütfen Kategori Seçiniz", new { @class="form-control-genislik"})
+                    </div>
+                   <br/>
+
+                   
+
+
+                   <div class="col-sm-11">
+                       <button class="btn btn-outline-success">Güncelle</button>
+                   </div>
+
+
+
+
+                </div>
+
+
+
+
+
+            </section>
+
+        </div>
+
+
+
+
+
+    </div>
+
+}

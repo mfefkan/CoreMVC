@@ -18,8 +18,8 @@ namespace MVCReady_1.Controllers
             return View(_db.Products.ToList());
             
         }
-
-		public IActionResult AddProduct()
+        
+        public IActionResult AddProduct()
 		{
             AddProductPageVM x = new AddProductPageVM
             {
@@ -50,5 +50,54 @@ namespace MVCReady_1.Controllers
             
             return RedirectToAction("ListProducts");
         }
+
+        public IActionResult UpdateProduct(int id)
+        {
+            Product willBeUpdated = _db.Products.Find(id);
+
+            ProductVM wilBeUpdatedProductVM = new ProductVM
+            {
+                ProductName = willBeUpdated.ProductName,
+                UnitPrice = willBeUpdated.UnitPrice,
+                ID = willBeUpdated.ID
+
+            };
+
+            AddProductPageVM willBeUpdatedProductPageVM = new AddProductPageVM
+            {
+                Categories = _db.Categories.Select(x => new CategoryVM
+                {
+                    ID = x.ID,
+                    Description = x.Description,
+                    CategoryName = x.CategoryName
+                }).ToList(),
+                Product = wilBeUpdatedProductVM
+            };
+
+            return View(willBeUpdatedProductPageVM);
+        }
+        [HttpPost]
+        public IActionResult UpdateProduct(ProductVM product)
+        {
+            Product toBeUpdated = _db.Products.Find(product.ID);
+
+            toBeUpdated.ProductName = product.ProductName;
+            toBeUpdated.UnitPrice = product.UnitPrice;
+            toBeUpdated.Category = _db.Categories.Find(product.CategoryID);
+            toBeUpdated.ID = product.ID;
+
+            _db.Update(toBeUpdated);
+            _db.SaveChanges();
+
+            return RedirectToAction("ListProducts");
+        }
+
+        public ActionResult DeleteProduct(int id)
+        {
+            _db.Products.Remove(_db.Products.Find(id));
+            _db.SaveChanges();
+            return RedirectToAction("ListProducts");
+        }
+
     }
 }
