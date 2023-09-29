@@ -1,0 +1,43 @@
+﻿@model List<Product>
+
+<h1>Ürünler</h1>
+
+<table class="table table-hover">
+
+	<tr>
+
+		<th>Isim</th>
+		<th>Fiyat</th>
+		<th>Kategori</th>
+		<th>
+
+
+			<a asp-action="AddProduct" asp-controller="Product" method="post" class="btn btn-danger">Ekle</a>
+
+
+		</th>
+
+
+	</tr>
+
+
+	@foreach (Product item in Model)
+	{
+		<tr>
+			<td>@item.ProductName</td>
+			<td>@item.UnitPrice</td>
+			<td>@item.Category.CategoryName</td>
+			<td>
+				<a asp-action="UpdateProduct" asp-controller="Product" asp-route-id="@item.ID" class="btn btn-warning">Güncelle</a>
+			</td>
+
+			<td>
+
+				<a asp-action="DeleteProduct" asp-controller="Product" asp-route-id="@item.ID" class="btn btn-danger">Sil</a>
+
+			</td>
+
+		</tr>
+	}
+
+</table>

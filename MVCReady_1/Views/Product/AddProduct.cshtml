@@ -1,0 +1,76 @@
+﻿@using MVCReady_1.VMModels;
+
+@model AddProductPageVM
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewBag.Title = "AddProduct";
+}
+
+
+
+<style>
+
+    .genislik {
+        width: 300px;
+    }
+</style>
+
+@using (Html.BeginForm("AddProduct", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="row">
+
+        <div class="col-sm-12">
+
+            <section class="panel">
+
+                <header class="panel-heading">
+                    Ürün Ekleme Sayfası
+                </header>
+
+                <br /> <br />
+
+                <div class="form-group">
+                    <label class="col-sm-2">Ürün Isim</label>
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(x => x.Product.ProductName, new { @class = "form-control-genislik" })
+                    </div>
+                </div>
+
+                <br /> 
+
+                <div class="form-group">
+                    <label class="col-sm-2">Ürün Fiyat</label>
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(x => x.Product.UnitPrice, new { @class = "form-control-genislik" })
+                    </div>
+                </div>
+
+                <br /> 
+
+                <div class="form-group">
+                    <label class="col-sm-2">Ürün Kategorisi'</label>
+                    <div class="col-sm-10">
+                        @Html.DropDownListFor(y => y.Product.CategoryID, new SelectList(Model.Categories, "ID", "CategoryName"), "Lütfen Seçiniz", new { @class = "form-control-genislik" })
+                    </div>
+                </div>
+
+                <br />  
+
+                <div class="form-group">
+
+                    <label class="col-sm-2">İşlem:</label>
+                    <div class="col-sm-10">
+                        <button class="btn btn-primary">Ekle</button>
+                    </div>
+
+                </div>
+
+
+            </section>
+
+        </div>
+
+    </div>
+}
